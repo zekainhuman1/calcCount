@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuyotCalc</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+  <header class="header no-print">
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+        <span class="switch-title">особисте / внутрішньогрупове</span>
+      </label>
+    <div class="nav">
+      <button onclick="window.print()" class="material-symbols-rounded">
+        print
+        </button>
+    </div>
+  </header>
+  <main class="calc">
+    <aside class="titles">
+      <span class="title">Базова інформація про обладнання</span>
+      <span class="text">Найменування обладнання</span>
+      <span class="text">Інвентарний номер</span>
+      <span class="text">Серійний номер</span>
+
+      <span class="title">Вартість, грн з ПДВ</span>
+      <span class="text">Початкова, <b>В</b>поч</span>
+      <span class="text">Залишкова, <b>В</b>зал</span>
+      <span class="text">Необхідність ремонту, <b>В</b>рем</span>
+      <span class="text">Розшифровка ремонту</span>
+      <span class="text">Продажна, <b>В</b>прод</span>
+      <span class="text">Розрахункова</span>
+
+      <span class="title">Тимчасові показники, місяців</span>
+      <span class="text">Поточний термін експлуатації, <b>N</b></span>
+      <span class="text">Дата введення в експлуатацію</span>
+      <span class="text">Дата розрахунку</span>
+      <span class="text">Бух. термін експлуатації, <b>Т</b>бух</span>
+      <span class="text">Гар. термін експлуатації <b>Т</b>гар</span>
+      <span class="text">Макс. термін експлуатації <b>Т</b>екс</span>
+
+      <span class="title">Коефіцієнти</span>
+      <span class="text"><b>К</b>ст</span>
+      <span class="text">до <b>Т</b>гар</span>
+      <span class="text">до <b>Т</b>екс</span>
+      <span class="text">от <b>Т</b>екс</span>
+      <span class="text"><b>К</b>н</span>
+      <span class="text"><b>К</b>$</span>
+      <span class="text"><b>К</b>$1</span>
+      <span class="text"><b>К</b>$2</span>
+      <span class="text"><b>К</b>гар</span>
+      <span class="text"><b>К</b>min</span>
+
+
+    </aside>
+    <section class="values">
+      <span class="divider"></span>
+      <div class="form-group">  
+        <textarea placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form-group">  
+        <textarea placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form-group">  
+        <textarea placeholder="введіть значення"></textarea>
+      </div>
+
+      <span class="divider"></span>
+      <div class="form-group price">  
+        <textarea id="priceBuy" rows="1" placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form-group price">  
+        <textarea id="resCost" placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form-group price">  
+        <textarea id="repCost" placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form-group price">  
+        <textarea placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form price">  
+        <textarea id="sellCost" rows="1" wrap="off" disabled placeholder="введіть значення">bbb</textarea>
+      </div>
+      <div class="form">  
+        <textarea id="calcValue" disabled placeholder="введіть значення">aaa</textarea>
+      </div>
+
+      <span class="divider"></span>
+      <div class="form">  
+        <textarea disabled id="result" placeholder="Розраховується автоматично"></textarea>
+      </div>
+      <form class="form-group">
+        <label for="commissioning">Оберіть дату:</label>
+        <input type="date" id="commissioning" name="commissioning">
+      </form>
+      <form class="form-group">
+        <label for="calculation">Оберіть дату:</label>
+        <input type="date" id="calculation" name="calculation">
+      </form>
+      <div class="form">  
+        <textarea id="tbuh" disabled placeholder="введіть значення">36</textarea>
+      </div>
+      <div class="form-group">  
+        <textarea id="tgar" placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form">  
+        <textarea id="tmax" disabled placeholder="Розраховується автоматично"></textarea>
+      </div>
+
+      <span class="divider"></span>
+      <div class="form">  
+        <textarea id="kst" disabled placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form">  
+        <textarea id="toTgar" disabled placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form">  
+        <textarea id="toTmax" disabled placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form">  
+        <textarea id="fromTmax" disabled placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form">  
+        <textarea id="kn" disabled placeholder="введіть значення">1</textarea>
+      </div>
+      <div class="form">  
+        <textarea id="rateK" disabled placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form">  
+        <textarea id="rateOld" disabled placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form">  
+        <textarea id="rateNow" disabled placeholder="введіть значення"></textarea>
+      </div>
+      <div class="form">  
+        <textarea id="kgar" disabled placeholder="введіть значення">40%</textarea>
+      </div>
+      <div class="form">  
+        <textarea id="kmin" disabled placeholder="введіть значення">2.5%</textarea>
+      </div>
+
+
+    </section>
+    <!-- <section class="setValues"></section> -->
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>

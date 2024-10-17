@@ -203,6 +203,9 @@ align-items: end;
 }
 
 @media print {
+  .calc {
+    width: 90vw;
+  }
   body {
       font-size: 12px;
       color: black;

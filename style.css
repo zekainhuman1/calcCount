@@ -129,9 +129,10 @@ cursor: pointer;
 
 .calc {
   display: grid;
+  margin: 0 auto;
   grid-template-columns: 1fr 1fr;
   padding: 2em;
-  /* gap: 2em; */
+  width: 80vh;
 }
 
 .titles {

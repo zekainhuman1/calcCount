@@ -132,7 +132,7 @@ cursor: pointer;
   margin: 0 auto;
   grid-template-columns: 1fr 1fr;
   padding: 2em;
-  width: 80vh;
+  width: 65vw;
 }
 
 .titles {
@@ -154,7 +154,7 @@ align-items: end;
 
 .form-group textarea {
   height: 95%;
-  width: 40vw;
+  width: 25vw;
   text-align: end;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 0.8;

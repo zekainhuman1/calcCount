@@ -310,7 +310,7 @@ cursor: pointer;
 }
 
 .item {
-  padding: 20px 0;
+  padding: 20px 0 5px 0;
   font-size: 14px;
   border-top: #242424 solid 1px;
 }

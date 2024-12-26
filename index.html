@@ -10,9 +10,9 @@
 <body>
   <header class="header no-print">
       <label class="switch">
-        <input type="checkbox">
+        <input type="checkbox" id="toggleView">
         <span class="slider round"></span>
-        <span class="switch-title">особисте / внутрішньогрупове</span>
+        <span class="switch-title">форма / рахунок</span>
       </label>
     <div class="nav">
       <button onclick="window.print()" class="material-symbols-rounded">
@@ -21,6 +21,7 @@
     </div>
   </header>
   <main class="calc">
+
     <aside class="titles">
       <span class="title">Базова інформація про обладнання</span>
       <span class="text">Найменування обладнання</span>
@@ -28,10 +29,10 @@
       <span class="text">Серійний номер</span>
 
       <span class="title">Вартість, грн з ПДВ</span>
-      <span class="text">Початкова, <b>В</b>поч</span>
-      <span class="text">Залишкова, <b>В</b>зал</span>
-      <span class="text">Необхідність ремонту, <b>В</b>рем</span>
-      <span class="text">Розшифровка ремонту</span>
+      <span class="text">Початкова вартість техніки, <b>В</b>поч</span>
+      <span class="text">Залишкова вартість, <b>В</b>зал</span>
+      <span class="text no-print" id="repCostSpan">Вартість ремонту техніки, <b>В</b>рем</span>
+      <span class="text no-print" id="repDescriptionSpan">Розшифровка ремонту</span>
       <span class="text">Продажна, <b>В</b>прод</span>
       <span class="text">Розрахункова</span>
 
@@ -44,29 +45,42 @@
       <span class="text">Макс. термін експлуатації <b>Т</b>екс</span>
 
       <span class="title">Коефіцієнти</span>
-      <span class="text"><b>К</b>ст</span>
+      <span class="text">Коефіцієнт старіння, <b>К</b>ст</span>
       <span class="text">до <b>Т</b>гар</span>
-      <span class="text">до <b>Т</b>екс</span>
-      <span class="text">от <b>Т</b>екс</span>
-      <span class="text"><b>К</b>н</span>
-      <span class="text"><b>К</b>$</span>
-      <span class="text"><b>К</b>$1</span>
-      <span class="text"><b>К</b>$2</span>
-      <span class="text"><b>К</b>гар</span>
-      <span class="text"><b>К</b>min</span>
+      <span class="text">від <b>Т</b>гар до <b>Т</b>екс</span>
+      <span class="text">від <b>Т</b>екс</span>
+      <span class="text">Коефіцієнт зміни податків, <b>К</b>н</span>
+      <span class="text">Коефіцієнт між датами викуп/придбання, <b>К</b>$</span>
+      <span class="text">Курс долар/гривня <b>на дату викупу</b>, <b>К</b>$2</span>
+      <span class="text">Курс долар/гривня <b>на дату придбання</b>, <b>К</b>$1</span>
 
+      <span class="text">Коефіцієнт після завершення гарантії, <b>К</b>гар</span>
+      <span class="text">Коефіцієнт макс. терміну експлуатації, <b>К</b>min</span>
+      <span class="title"></span>
+      <span class="sum">Всього (разом з ПДВ):</span>
 
+      <p style="width: 100%; display: inline-block;">Розрахунок підготував:</p>
+      <div class="form" style="padding-bottom: 10px;">
+        <label for="confirmName" style="padding-right: 3px;">ПІБ</label>
+        <textarea rows="1" wrap="off" style="width: 25%; border-bottom: black 1px solid;" id="confirmName"></textarea>
+        <label for="confirmDate" style="padding-right: 3px;">дата</label>  
+        <textarea rows="1" wrap="off" style="width: 15%; border-bottom: black 1px solid;" id="confirmDate"></textarea>
+        <label for="confirmSign" style="padding-right: 3px;">підпис</label>  
+        <textarea rows="1" wrap="off" style="width: 15%; border-bottom: black 1px solid;" id="confirmSign"></textarea>
+      </div>
     </aside>
+
+
     <section class="values">
       <span class="divider"></span>
       <div class="form-group">  
-        <textarea placeholder="введіть значення"></textarea>
+        <textarea id="itemName" placeholder="введіть значення"></textarea>
       </div>
       <div class="form-group">  
-        <textarea placeholder="введіть значення"></textarea>
+        <textarea id="itemInvNum" placeholder="введіть значення"></textarea>
       </div>
       <div class="form-group">  
-        <textarea placeholder="введіть значення"></textarea>
+        <textarea id="itemSerialNum" placeholder="введіть значення"></textarea>
       </div>
 
       <span class="divider"></span>
@@ -76,76 +90,137 @@
       <div class="form-group price">  
         <textarea id="resCost" placeholder="введіть значення"></textarea>
       </div>
-      <div class="form-group price">  
-        <textarea id="repCost" placeholder="введіть значення"></textarea>
+      <div class="form-group price" id="repCostPlace">  
+        <textarea id="repCost" placeholder="необов'язково"></textarea>
       </div>
-      <div class="form-group price">  
-        <textarea placeholder="введіть значення"></textarea>
+      <div class="form-group" id="repDescriptionPlace">  
+        <textarea id="repDescription" placeholder="необов'язково"></textarea>
       </div>
       <div class="form price">  
-        <textarea id="sellCost" rows="1" wrap="off" disabled placeholder="введіть значення">bbb</textarea>
+        <textarea id="sellCost" rows="1" wrap="off" disabled placeholder="розраховується автоматично">розраховується автоматично</textarea>
       </div>
       <div class="form">  
-        <textarea id="calcValue" disabled placeholder="введіть значення">aaa</textarea>
+        <textarea id="calcValue" disabled placeholder="розраховується автоматично">розраховується автоматично</textarea>
       </div>
 
       <span class="divider"></span>
       <div class="form">  
-        <textarea disabled id="result" placeholder="Розраховується автоматично"></textarea>
+        <textarea disabled id="result" placeholder="розраховується автоматично"></textarea>
       </div>
       <form class="form-group">
-        <label for="commissioning">Оберіть дату:</label>
-        <input type="date" id="commissioning" name="commissioning">
+        <label for="commissioning" class="no-print">Оберіть дату:</label>
+        <input type="date" class="no-boreder" id="commissioning" name="commissioning">
       </form>
       <form class="form-group">
-        <label for="calculation">Оберіть дату:</label>
-        <input type="date" id="calculation" name="calculation">
+        <label for="calculation" class="no-print">Оберіть дату:</label>
+        <input type="date" class="no-boreder" id="calculation" name="calculation">
       </form>
       <div class="form">  
-        <textarea id="tbuh" disabled placeholder="введіть значення">36</textarea>
+        <textarea id="tbuh" disabled>36</textarea>
       </div>
       <div class="form-group">  
         <textarea id="tgar" placeholder="введіть значення"></textarea>
       </div>
       <div class="form">  
-        <textarea id="tmax" disabled placeholder="Розраховується автоматично"></textarea>
+        <textarea id="tmax" disabled placeholder="розраховується автоматично"></textarea>
       </div>
 
       <span class="divider"></span>
       <div class="form">  
-        <textarea id="kst" disabled placeholder="введіть значення"></textarea>
+        <textarea id="kst" disabled placeholder="розраховується автоматично"></textarea>
       </div>
       <div class="form">  
-        <textarea id="toTgar" disabled placeholder="введіть значення"></textarea>
+        <textarea id="toTgar" disabled placeholder="розраховується автоматично"></textarea>
       </div>
       <div class="form">  
-        <textarea id="toTmax" disabled placeholder="введіть значення"></textarea>
+        <textarea id="toTmax" disabled placeholder="розраховується автоматично"></textarea>
       </div>
       <div class="form">  
-        <textarea id="fromTmax" disabled placeholder="введіть значення"></textarea>
+        <textarea id="fromTmax" disabled></textarea>
       </div>
       <div class="form">  
-        <textarea id="kn" disabled placeholder="введіть значення">1</textarea>
+        <textarea id="kn" disabled>1</textarea>
       </div>
       <div class="form">  
-        <textarea id="rateK" disabled placeholder="введіть значення"></textarea>
+        <textarea id="rateK" disabled placeholder="розраховується автоматично"></textarea>
       </div>
       <div class="form">  
-        <textarea id="rateOld" disabled placeholder="введіть значення"></textarea>
+        <textarea id="rateNow" disabled placeholder="оберіть дату"></textarea>
       </div>
       <div class="form">  
-        <textarea id="rateNow" disabled placeholder="введіть значення"></textarea>
+        <textarea id="rateOld" disabled placeholder="оберіть дату введення в експлуатацію"></textarea>
       </div>
+
       <div class="form">  
         <textarea id="kgar" disabled placeholder="введіть значення">40%</textarea>
       </div>
       <div class="form">  
         <textarea id="kmin" disabled placeholder="введіть значення">2.5%</textarea>
       </div>
+      <span class="divider"></span>
+      <span class="sum" id="lastSum">&nbsp;</span>
 
-
+      <p style="width: 100%; display: inline-block;">Узгоджено:</p>
+      <div class="form" style="padding-bottom: 20px; width: 100%;">
+        <label for="confirmName" style="padding-right: 3px;">ПІБ</label>
+        <textarea rows="1" wrap="off" style="width: 25%; border-bottom: black 1px solid;" id="confirmName"></textarea>
+        <label for="confirmDate" style="padding-right: 3px;">дата</label>  
+        <textarea rows="1" wrap="off" style="width: 15%; border-bottom: black 1px solid;" id="confirmDate"></textarea>
+        <label for="confirmSign" style="padding-right: 3px;">підпис</label>  
+        <textarea rows="1" wrap="off" style="width: 15%; border-bottom: black 1px solid;" id="confirmSign"></textarea>
+      </div>
+      <div class="form" style="padding-bottom: 20px; width: 100%;">
+        <label for="confirmName" style="padding-right: 3px;">ПІБ</label>
+        <textarea rows="1" wrap="off" style="width: 25%; border-bottom: black 1px solid;" id="confirmName"></textarea>
+        <label for="confirmDate" style="padding-right: 3px;">дата</label>  
+        <textarea rows="1" wrap="off" style="width: 15%; border-bottom: black 1px solid;" id="confirmDate"></textarea>
+        <label for="confirmSign" style="padding-right: 3px;">підпис</label>  
+        <textarea rows="1" wrap="off" style="width: 15%; border-bottom: black 1px solid;" id="confirmSign"></textarea>
+      </div>
+      <div class="form" style="padding-bottom: 20px; width: 100%;">
+        <label for="confirmName" style="padding-right: 3px;">ПІБ</label>
+        <textarea rows="1" wrap="off" style="width: 25%; border-bottom: black 1px solid;" id="confirmName"></textarea>
+        <label for="confirmDate" style="padding-right: 3px;">дата</label>  
+        <textarea rows="1" wrap="off" style="width: 15%; border-bottom: black 1px solid;" id="confirmDate"></textarea>
+        <label for="confirmSign" style="padding-right: 3px;">підпис</label>  
+        <textarea rows="1" wrap="off" style="width: 15%; border-bottom: black 1px solid;" id="confirmSign"></textarea>
+      </div>
     </section>
-    <!-- <section class="setValues"></section> -->
+
+    <!-- відображення рахунку -->
+    <div id="newElementsContainer" class="hidden">
+      <article class="bill">
+        <h2>Рахунок № <input class="billNum" type="number" id="invoiceNumber"> від <span id="formattedDate"></span></h2>
+        <p class="right">Місце складання: м. Київ</p>
+
+        <label for="provider">Постачальник:</label>
+        <select id="provider" name="provider" class="no-boreder">
+          <option value="test1">ТОВ "Рога"</option>
+          <option value="test2">ООО "Копита"</option>
+        </select>
+        <p id="description"></p>
+
+        
+        <span class="rowTitle">Покупець:</span><span style="font-weight: bold;">ПІБ працівника,</span>
+        <div class="formBill">
+          <textarea rows="1" wrap="off" id="confirmName"></textarea>
+        </div>
+
+        <p class="rowTitle">Договір:</p><input class="billText" type="text">
+      </br>
+        <p class="rowTitle">Оплатити до:</p><input class="billText" type="date">
+      </br>
+<p class="item">і/н: <span class="itemInvNum"></span>, с/н: <span class="itemSerialNum"></span>, <span class="itemName"></span>, Ціна без ПДВ: <span class="itemPrice"></span> грн, Всього із ПДВ: <span class="itemLastPrice"></span> грн.</p>
+<span class="rowTitle">Сума прописом:</span><span id="numToText"></span>
+<span class="dividerBill"></span>
+<form class="right">
+  <label for="sign">Виписав(ла):</label>
+  <input type="text" class="no-boreder" id="sign" name="sign">
+</form>
+
+
+      </article>
+    </div>
   </main>
   <script type="module" src="./src/js/main.js"></script>
 </body>

@@ -130,7 +130,7 @@ cursor: pointer;
 .calc {
   display: grid;
   margin: 0 auto;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   padding: 2em;
   width: 65vw;
 }
@@ -145,7 +145,7 @@ cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-align-items: end;
+  align-items: end;
 }
 
 .form-group {
@@ -179,7 +179,7 @@ align-items: end;
 
 .form textarea {
   height: 95%;
-  width: 40vw;
+  width: 30vw;
   text-align: end;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 0.8;
@@ -194,12 +194,142 @@ align-items: end;
   overflow: hidden;
 }
 
+
+
 .form textarea:disabled {
   background-color: rgba(255, 255, 255, 0.87);
 }
 
 .error {
   background-color: #ff8e8e !important;
+}
+
+.sum {
+  font-size: 1.3rem;
+  text-align: end;
+  font-weight: 800;
+}
+
+.hidden {
+  display: none;
+}
+
+
+/* РАХУНОК */
+.bill {
+  h2 {
+    border-bottom: #242424 solid 2px;
+  }
+
+  .right {
+    text-align: end;
+  }
+
+  label {
+    display: inline-block;
+    width: 15%;
+    /* padding-right: 10px; */
+  }
+
+  #sign {
+    width: 200px;
+    margin-top: 30px;
+    resize: none;
+    overflow: hidden;
+    border: none;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    font-size: 12px;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    border-bottom: #242424 solid 1px;
+  }
+
+  .formBill {
+    padding-bottom: 20px;
+    width: 100%;
+    height: 5rem;
+  
+    textarea {
+      margin-left: 15%;
+      width: 20vw;
+      resize: none;
+      overflow: hidden;
+      margin-top: 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #e5e5e5;
+      font-size: 12px;
+      font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  
+    }
+  }
+  
+  .billNum {
+    width: 100px;
+    border: none;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    resize: none;
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .billText {
+    width: 20vw;
+    height: 18px;
+    border: none;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    resize: none;
+    overflow: hidden;
+    font-size: 12px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  }
+
+  select {
+    padding: 5px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    resize: none;
+    overflow: hidden;
+  }
+  
+  #description {
+    margin-top: 20px;
+    margin-left: 15%;
+    height: 5rem;
+  }
+}
+
+.rowTitle {
+  display: inline-block;
+  width: 15%;
+}
+
+.item {
+  padding: 20px 0;
+  font-size: 14px;
+  border-top: #242424 solid 1px;
+}
+
+.itemLastPrice {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#numToText {
+  font-style: italic;
+}
+
+.dividerBill {
+  height: 1.1rem;
+  padding: 0.5rem 0;
+  display: flex;
+  width: 100%;
+  border-bottom: #242424 solid 2px;
 }
 
 @media print {
@@ -213,4 +343,14 @@ align-items: end;
   .no-print {
       display: none;
   }
+  .no-boreder {
+      border: none;
+      -webkit-appearance: none; /* вимикає стандартну стрілочку */
+      -moz-appearance: none; /* вимикає для Firefox */
+      appearance: none; /* для сучасних браузерів */
+      background: transparent; /* фон без стрілки */
+      padding-right: 20px; /* додаємо відступ, щоб компенсувати місце під стрілку */
+    
+  }
 }
+
